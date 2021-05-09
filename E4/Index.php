@@ -56,7 +56,7 @@
               <a class="nav-link" href="PHP/Reservation.php" style="color: white">Reservation</a>
             </li>
             <li class="nav-item" id="MonCompteButtonNavBarre">                                 
-              <a class="nav-link" href="PHP/MonCompte.php" style="color: white">Mon Compte</a>
+              <a class="nav-link" href="PHP/login.php" style="color: white">Mon Compte</a>
             </li>
                 </form>
               </div>
