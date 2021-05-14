@@ -1,5 +1,6 @@
 <?php
 
+
 function base_connection() : void
 {
 	$serverName="localhost";
@@ -12,6 +13,10 @@ function base_connection() : void
 } 
 
 function init_php_session() :bool{
+=======
+function init_php_session() : bool
+{
+>>>>>>> main
 	if(!session_id())
 	{
 		session_start();
