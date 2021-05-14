@@ -1,3 +1,11 @@
+<?php 
+ $serverName="localhost";
+  $user="Easyloc_user";
+  $password="pass123";
+  $database="Easyloc";
+  $bdd = new PDO("mysql:host=$serverName;dbname=$database;charset=utf8", $user, $password);
+ ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,331 +31,148 @@
 
 
                   <!-- NAVBAR !-->
-                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top "
-                 style="padding: 0; margin: 0;">
-                <div class="container-fluid">
-              <a class="navbar-brand" href="#EasyLoc"  style="color: white; font-size: 1.5em;"><h1 id="EasyLoc">EasyLoc</h1></a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left: 27%">
-
-
-                  <li class="nav-item ">
-                    <a class="nav-link"  class="nav-link js-scroll-trigger" href="#Appartement" style="color: white">Appartement </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" class="nav-link js-scroll-trigger" href="#Maison" style="color: white">Maison</a>
-                  </li>
-                   <li class="nav-item">
-                    <a class="nav-link" class="nav-link js-scroll-trigger" href="#Bateau" style="color: white">Bateau</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" class="nav-link js-scroll-trigger" href="#Camping" style="color: white">Camping</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" class="nav-link js-scroll-trigger" href="#Studio" style="color: white">Studio</a>
-                  </li>                  
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                  <li class="nav-item" id="Reservation">                                 
-              <a class="nav-link" href="PHP/Reservation.php" style="color: white">Reservation</a>
-            </li>
-            <li class="nav-item" id="MonCompteButtonNavBarre">                                 
-              <a class="nav-link" href="PHP/login.php" style="color: white">Mon Compte</a>
-            </li>
-                </form>
-              </div>
-            </nav>
+                <?php include("include/header.php") ?>
 </head>
-<?php ?>
+
 
 <body>          
+  <!-- SLIDE!-->
+  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="margin-left: -11px;">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="../E4/img/slide1.jpg" class="d-block w-100" style="height: 338px;" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="../E4/img/slide2.jpg" class="d-block w-100" style="height: 338px;" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="../E4/img/slide3.jpg" class="d-block w-100" style="height: 338px;" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
 
-  <div class="d-flex justify-content-center">
+<!-- APPART CARD -->
+<h2 id="Appartement">Appartement</h2>
+<div class='d-flex justify-content-center'>
+<?php
+  $request = $bdd->query("SELECT * FROM Appartement");
+  $nb_data = $request->rowCount();
 
+  echo "<br><br>";
+  while ($data = $request->fetch()){ 
+    $uid=$data["id_Appartement"];
+    echo "<div class='card text-white bg-secondary mb-3' style='width:500px; margin: 10px 10px 10px 10px ;'>";
+        echo "<img src=".$data["Image"]." class='card-img-top' style='width=500px'>";
+          echo "<div class='card-body'>";
+              echo "<h5 class='card-title'></h5>";
+              echo "<p class='card-text'>".$data["Description"]."</p>";
+              echo "<a href='PHP/appartement.php?id=".$uid."' class='btn btn-primary'>En savoir plus</a>";
+          echo "</div>";
+    echo "</div>"; 
 
-            <!-- SLIDE!-->
-            <<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="margin-left: -11px;">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img src="../E4/img/slide1.jpg" class="d-block w-100" style="height: 338px;" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="../E4/img/slide2.jpg" class="d-block w-100" style="height: 338px;" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="../E4/img/slide3.jpg" class="d-block w-100" style="height: 338px;" alt="...">
-                  </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>
+  }
+?>      
+</div>  
+ss
+<!-- MAISON CARD -->
+<h2 id="Maison">Maison</h2> 
+<div class='d-flex justify-content-center'>
+<?php
+  $request = $bdd->query("SELECT * FROM Mais");
+  $nb_data = $request->rowCount();
+  echo "<br><br>";
+  while ($data = $request->fetch()){ 
+    echo "<div class='card text-white bg-secondary mb-3' style='width:500px; margin: 10px 10px 10px 10px ;'>";
+        echo "<img src=".$data["Image"]." class='card-img-top' style='width=500px'>";
+          echo "<div class='card-body'>";
+              echo "<h5 class='card-title'></h5>";
+              echo "<p class='card-text'>".$data["Description"]."</p>";
+              echo "<a href='' class='btn btn-primary'>En savoir plus </a>";
+          echo "</div>";
+    echo "</div>"; 
 
-                </div>
+  }
+?>      
+</div> 
 
-                <br><br><h2 id="Appartement"><a>Appartement</a></h2> <br>
+<!-- BATEAU CARD -->
+<h2 id="Bateau">Yacht</h2> 
+<div class='d-flex justify-content-center'>
+<?php
+  $request = $bdd->query("SELECT * FROM Appartement");
+  $nb_data = $request->rowCount();
+  echo "<br><br>";
+  while ($data = $request->fetch()){ 
+    echo "<div class='card text-white bg-secondary mb-3' style='width:500px; margin: 10px 10px 10px 10px ;'>";
+        echo "<img src=".$data["Image"]." class='card-img-top' style='width=500px'>";
+          echo "<div class='card-body'>";
+              echo "<h5 class='card-title'></h5>";
+              echo "<p class='card-text'>".$data["Description"]."</p>";
+              echo "<a href='' class='btn btn-primary'>En savoir plus </a>";
+          echo "</div>";
+    echo "</div>"; 
 
-                <!-- CARD Appartement!-->
-                <div class="row row-cols-1 row-cols-md-3 g-4" style="width: 100%;">
-                  <div class="col">
-                    <div class="card text-white bg-dark mb-3 h-100">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card text-white bg-dark mb-3 h-100">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a short card.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card text-white bg-dark mb-3 h-100">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a short card.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div><br><br>
-                 <h2 id="Maison"><a>Maison</a></h2> <br>    
-                <!-- CARD Maison!-->
-                <div class="row row-cols-1 row-cols-md-3 g-4" style="width: 100%">
-                  <div class="col">
-                    <div class="card text-white bg-dark mb-3 h-100">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card text-white bg-dark mb-3 h-100">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a short card.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card text-white bg-dark mb-3 h-100">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a short card.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <br><br><h2 id="Bateau"><a>Bateau</a></h2> <br>
-                 <!-- CARD Bateau!-->
-                <div class="row row-cols-1 row-cols-md-3 g-4" style="width: 100%">
-                  <div class="col">
-                    <div class="card text-white bg-dark mb-3 h-100">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card text-white bg-dark mb-3 h-100">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a short card.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card text-white bg-dark mb-3 h-100">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a short card.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <br><br><h2 id="Camping"><a>Camping</a></h2> <br>
-                 <!-- CARD Camping!-->
-                <div class="row row-cols-1 row-cols-md-3 g-4" style="width: 100%">
-                  <div class="col">
-                    <div class="card text-white bg-dark mb-3 h-100">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card text-white bg-dark mb-3 h-100">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a short card.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card text-white bg-dark mb-3 h-100">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a short card.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <br><br><h2 id="Studio"><a>Studio</a></h2> <br>
-                <!-- CARD Studio!-->
-                <div class="row row-cols-1 row-cols-md-3 g-4" style="width: 100%">
-                  <div class="col">
-                    <div class="card text-white bg-dark mb-3 h-100">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card text-white bg-dark mb-3 h-100">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a short card.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card text-white bg-dark mb-3 h-100">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a short card.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div><br><br>
+  }
+?>      
+</div> 
+
+<!-- CAMPIN CARD -->
+<h2 id="Camping">Camping</h2> 
+<div class='d-flex justify-content-center'>
+<?php
+  $request = $bdd->query("SELECT * FROM Appartement");
+  $nb_data = $request->rowCount();
+  echo "<br><br>";
+  while ($data = $request->fetch()){ 
+    echo "<div class='card text-white bg-secondary mb-3' style='width:500px; margin: 10px 10px 10px 10px ;'>";
+        echo "<img src=".$data["Image"]." class='card-img-top' style='width=500px'>";
+          echo "<div class='card-body'>";
+              echo "<h5 class='card-title'></h5>";
+              echo "<p class='card-text'>".$data["Description"]."</p>";
+              echo "<a href='' class='btn btn-primary'>En savoir plus </a>";
+          echo "</div>";
+    echo "</div>"; 
+
+  }
+?>      
+</div> 
+
+<!-- STUDIO CARD -->
+<h2 id="Studio">Studio</h2> 
+<div class='d-flex justify-content-center'>
+<?php
+  $request = $bdd->query("SELECT * FROM Appartement");
+  $nb_data = $request->rowCount();
+  echo "<br><br>";
+  while ($data = $request->fetch()){ 
+    echo "<div class='card text-white bg-secondary mb-3' style='width:500px; margin: 10px 10px 10px 10px ;'>";
+        echo "<img src=".$data["Image"]." class='card-img-top' style='width=500px'>";
+          echo "<div class='card-body'>";
+              echo "<h5 class='card-title'></h5>";
+              echo "<p class='card-text'>".$data["Description"]."</p>";
+              echo "<a href='' class='btn btn-primary'>En savoir plus </a>";
+          echo "</div>";
+    echo "</div>"; 
+
+  }
+?>      
+</div> 
 
 
-                <!--FOOTER !-->
-                                         <footer>
-                                <div class="container">
-                                   <div class="row">
-                                   
-                                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                                <ul class="adress">
-                                                     <span>Adress</span>    
-                                                     <li>
-                                                        <p>3 Allées des roses</p>
-                                                      </li>
-                                                      <li>
-                                                        <p>93130, Noisy Le Sec</p>
-                                                      </li>
-                                                      <li>
-                                                        <p>07.66.72.30.49</p>
-                                                      </li>
-                                                           
-                                                      <li>
-                                                        <p>rmessi@condorcet93.fr</p>
-                                                      </li>
-                                                      <li>
-                                                      <p>CFA UTEC Marne la vallée</p>
-                                                     </li>
-                                                 </ul>
-                                            </div>
-                                            
-                                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                                <ul class="contact">
-                                                    <span>Navigation</span>
-                                                    <li>
-                                                        <a id="EasyLoc" href="Accueil">Accueil</a> <br>
-                                                      </li>    
-                                                     <li>
-                                                        <a id="Maison" href="Maison">Maison</a> <br>
-                                                      </li>
-                                                      <li>
-                                                        <a id="Bateau" href="Bateau">Bateau</a> <br>
-                                                      </li>
-                                                      <li>
-                                                        <a id="Camping" href="Camping">Camping</a> <br>
-                                                      </li>
-                                                           
-                                                      <li>
-                                                        <a id="Studio" href="Studio">Studio</a> <br>
-                                                      </li>
 
-                                                 </ul>
-                                            </div>
 
-                                            
 
-                                       
-                                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"">
-                                               <ul class="social"  >
-                                                          <span>Social</span>    
-                                                           <li>
-                                                                <a href="https://www.facebook.com/redanls93"><i class="fa fa-facebook fa-2x"></i></a>
-                                                           </li>
-                                                            
-                                                           <li>
-                                                                <a href="https://www.linkedin.com/in/reda-messi-061379148/"><i class="fa fa-linkedin fa-2x"></i></a>
-                                                           </li>
-                                                           
-                                                           <li>
-                                                                <a href="https://twitter.com/9_djz3"><i class="fa fa-twitter fa-2x"></i></a>
-                                                           </li>
-                                                            
-                                                           <li>
-                                                                <a href="https://www.instagram.com/nrvv9.3/"><i class="fa fa-instagram fa-2x"></i></a>
-                                                          </li>
-                                                          
-                                                 </ul>
-                                           </div>
-                                       
-                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                                 <div class="search-text"> 
-                                                    <div class="container">
-                                                        <div class="row text-center">
-                                                         
-                                                           <div class="form">
-                                                                <span class="header-form">SIGN UP</span>    
-                                                                <form id="search-form" class="form-search form-horizontal">
-                                                                    <input type="text" class="input-search" placeholder="Email Address">
-                                                                    <input type="text" class="input-search" placeholder="Password"style="margin-top: 5%;">
-                                                                    <button type="submit" class="btn-search"><span style="font-size:13px;">SUBMIT</span></button>
-                                                                </form>
-                                                            </div>
-                                                        
-                                                        </div>         
-                                                    </div>     
-                                                </div>
-                                            </div>
-                                   </div> 
-                                </div>
-            </footer>
+
+        <!--FOOTER !-->
+        <?php include("include/footer.php")  ?>
 
 
 

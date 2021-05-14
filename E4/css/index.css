@@ -37,6 +37,11 @@
 
 
   }
+
+.CardAppartement{
+  display: 
+}
+
 p {
   font-size: clamp(0.1rem,2.5vw,1.8rem);
   font-size: 0.9rem;

@@ -1,6 +1,17 @@
 <?php
-function init_php_session() : bool
+
+function base_connection() : void
 {
+	$serverName="localhost";
+	$user="Easyloc_user";
+	$password="pass123";
+	$database="Easyloc";
+	$bdd = new PDO("mysql:host=$serverName;dbname=$database;charset=utf8", $user, $password);
+
+	return $bdd ;
+} 
+
+function init_php_session() :bool{
 	if(!session_id())
 	{
 		session_start();
