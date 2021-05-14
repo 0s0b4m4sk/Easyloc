@@ -31,9 +31,9 @@
 
 
                   <!-- NAVBAR !-->
-
                 <?php include("include/header.php") ?>
 </head>
+
 
                  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top "
                  style="padding: 0; margin: 0;">
@@ -74,15 +74,14 @@
               </div>
             </nav>
 </head>
-<?php ?>
+<?php
+
+
+ ?>
 
 <body>          
 
   <div class="d-flex justify-content-center">
-
->>>>>>> main
-
-
 <body>          
   <!-- SLIDE!-->
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="margin-left: -11px;">
